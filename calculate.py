@@ -1,23 +1,21 @@
-from itertools import groupby
+import sys
 
-f = open ('bill2.txt', 'rb')
+import cal_sum
+import add_expend
 
-recordDict = {}
-eachList = []
-recordlist = []
+if __name__ == "__main__":
+	try:
+		fw = open ('records.txt', 'a+b')
+		add_expend.add(fw)
+		fw.close()
 
-for line in f:
-	eachList = line.strip().split()
-	recordDict = {'name':eachList[1], 'money':eachList[2]}
-	recordlist.append(recordDict)
+		fr = open ('records.txt', 'r')
+		cal_sum.calSum(fr)
+		fr.close()
 
-category = lambda x: x['name']
-
-for key, values in groupby(sorted(recordlist, key=category), category):
-	print key
-	sum = 0.00
-
-	for value in values:
-		sum = sum + float(value['money'])
-	print sum
-	print "\n"
+	except IOError as e:
+  	  print "I/O error({0}): {1}".format(e.errno, e.strerror)
+	except ValueError:
+  	  print "Could not convert data to an integer."
+	except:
+  	  print "Unexpected error:", sys.exc_info()[0]
