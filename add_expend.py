@@ -1,7 +1,3 @@
-def add(fw):
-
-	date = '21/09/2016'
-	name = 'Modan'
-	amount = '00.40'
-
+def add(fw,date,name,amount):
 	fw.write(date+"    "+name+"    "+amount+"\n")
+	print "New record is added"

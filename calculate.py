@@ -1,16 +1,14 @@
 import sys
 
 import cal_sum
-import add_expend
+import get_input
 import check_records_exist
 
 if __name__ == "__main__":
 	try:
 		check_records_exist.checkFile()
 
-		fw = open ('records.txt', 'a+b')
-		add_expend.add(fw)
-		fw.close()
+		get_input.getInput()
 
 		fr = open ('records.txt', 'r')
 		cal_sum.calSum(fr)

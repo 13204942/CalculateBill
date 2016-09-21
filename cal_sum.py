@@ -13,6 +13,7 @@ def calSum(fr):
 	category = lambda x: x['name']
 
 	for key, values in groupby(sorted(recordlist, key=category), category):
+		print "--------------------------"
 		print key
 		sum = 0.00
 
