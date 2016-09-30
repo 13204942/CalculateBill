@@ -4,5 +4,6 @@ e.g. like electric bill, broadband bill or watrer bill
 
 The UI design tutorial website:
 http://doc.qt.io/qt-5/qtwidgets-layouts-basiclayouts-example.html
+http://zetcode.com/gui/pysidetutorial/layoutmanagement/
 
 ![Alt text](/python_app.JPG?raw=true "UI")
