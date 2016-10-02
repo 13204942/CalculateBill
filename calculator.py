@@ -54,7 +54,7 @@ class MyWidget(QWidget):
 
         self.addPersonButton = QPushButton("Add")
         self.addPersonButton.setFixedWidth(100)
-        #self.addPersonButton.clicked.connect(add_new_person.add_person(self.firtNameText.text())) #Set clicked function
+        #Set button clicked function
         self.connect(self.addPersonButton, SIGNAL("clicked()"),self.person_button_click)
         self.addPersonButtonBox.addWidget(self.addPersonButton)
 
@@ -131,8 +131,7 @@ class MyWidget(QWidget):
         self.setLayout(self.mainLayout)
         
     # Function reimplementing Key Press, Mouse Click and Resize Events
-    def person_button_click(self):
-        # shost is a QString object
+    def person_button_click(self):x
         add_new_person.add_person(self.firtNameText.text())
 
 
