@@ -3,6 +3,8 @@ import sys
 from PySide.QtGui import *
 from PySide.QtCore import *
 
+import add_new_person
+
 # Our main widget class
 class MyWidget(QWidget):
     # Constructor function
@@ -52,6 +54,8 @@ class MyWidget(QWidget):
 
         self.addPersonButton = QPushButton("Add")
         self.addPersonButton.setFixedWidth(100)
+        #self.addPersonButton.clicked.connect(add_new_person.add_person(self.firtNameText.text())) #Set clicked function
+        self.connect(self.addPersonButton, SIGNAL("clicked()"),self.person_button_click)
         self.addPersonButtonBox.addWidget(self.addPersonButton)
 
         self.addPersonLayout.addRow(self.addPersonLabel)
@@ -127,6 +131,11 @@ class MyWidget(QWidget):
         self.setLayout(self.mainLayout)
         
     # Function reimplementing Key Press, Mouse Click and Resize Events
+    def person_button_click(self):
+        # shost is a QString object
+        add_new_person.add_person(self.firtNameText.text())
+
+
     #def keyPressEvent(self, event):
         #if event.key() == Qt.Key_Escape:
             #self.close()
