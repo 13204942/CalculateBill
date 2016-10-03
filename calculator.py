@@ -70,11 +70,7 @@ class MyWidget(QWidget):
         self.nameComboBox = QComboBox()
         self.nameComboBox.setFixedWidth(250)
         #Set button clicked function
-        #self.nameComboBox.activated.connect(self.combobox_add_item)
         self.nameComboBox.addItems(get_person.get())
-        #self.nameComboBox.addItem("Fang")
-        #self.nameComboBox.addItem("Modan")
-        #self.nameComboBox.addItem("Chang")
 
         self.dateLabel = QLabel("Date:")
         self.dateText = QLineEdit()
@@ -143,9 +139,6 @@ class MyWidget(QWidget):
 
     def expense_button_click(self):
         add_expense.add(self.dateText.text(), self.nameComboBox.currentText(), self.amountText.text())
-
-    #def combobox_add_item(self):
-    #    self.nameComboBox.addItems(get_person.get())
 
     #def keyPressEvent(self, event):
         #if event.key() == Qt.Key_Escape:
