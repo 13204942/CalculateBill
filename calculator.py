@@ -4,6 +4,8 @@ from PySide.QtGui import *
 from PySide.QtCore import *
 
 import add_new_person
+import get_person
+import add_expense
 
 # Our main widget class
 class MyWidget(QWidget):
@@ -67,9 +69,12 @@ class MyWidget(QWidget):
         self.nameLabel = QLabel("First Name:")
         self.nameComboBox = QComboBox()
         self.nameComboBox.setFixedWidth(250)
-        self.nameComboBox.addItem("Fang")
-        self.nameComboBox.addItem("Modan")
-        self.nameComboBox.addItem("Chang")
+        #Set button clicked function
+        #self.nameComboBox.activated.connect(self.combobox_add_item)
+        self.nameComboBox.addItems(get_person.get())
+        #self.nameComboBox.addItem("Fang")
+        #self.nameComboBox.addItem("Modan")
+        #self.nameComboBox.addItem("Chang")
 
         self.dateLabel = QLabel("Date:")
         self.dateText = QLineEdit()
@@ -83,6 +88,8 @@ class MyWidget(QWidget):
 
         self.addExpenseButton = QPushButton("Add")
         self.addExpenseButton.setFixedWidth(100)
+        #Set button clicked function
+        self.connect(self.addExpenseButton, SIGNAL("clicked()"),self.expense_button_click)
         self.addExpenseButtonBox.addWidget(self.addExpenseButton)
 
         self.addExpenseLayout.addRow(self.nameLabel, self.nameComboBox)
@@ -131,9 +138,14 @@ class MyWidget(QWidget):
         self.setLayout(self.mainLayout)
         
     # Function reimplementing Key Press, Mouse Click and Resize Events
-    def person_button_click(self):x
+    def person_button_click(self):
         add_new_person.add_person(self.firtNameText.text())
 
+    def expense_button_click(self):
+        add_expense.add(self.dateText.text(), self.nameComboBox.currentText(), self.amountText.text())
+
+    #def combobox_add_item(self):
+    #    self.nameComboBox.addItems(get_person.get())
 
     #def keyPressEvent(self, event):
         #if event.key() == Qt.Key_Escape:
