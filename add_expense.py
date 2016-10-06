@@ -6,9 +6,9 @@ def add(date,name,amount):
 	fw = open('records.txt', 'a+b')
 
 	if date == "" or name == "" or amount == "":
-		print ("Empty input")
+		return "Empty input"
 		fw.close()
 	else:
 		fw.write(date + "\t" + name + "\t" + amount + "\n")
 		fw.close()
-		print "Add new record successfully"
+		return "Add new record successfully"

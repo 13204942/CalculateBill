@@ -7,9 +7,9 @@ def add_person(newName):
 	fw = open('person.txt','a+b')
 
 	if newName == "":
-		print ("Empty input")
+		return "Empty input"
 		fw.close()
 	else:
 		fw.write("\t" + newName)
 		fw.close()
-		print ("Add new person successfully.")
+		return "Add new person successfully."

@@ -15,10 +15,11 @@ class MyWidget(QWidget):
         QWidget.__init__(self)
         self.setWindowTitle("Bills Calculator")
         self.setFixedWidth(450)
-        self.setMinimumSize(450, 500)
-        self.setGeometry(100, 100, 270, 450)
+        self.setMinimumSize(450, 525)
+        self.setGeometry(100, 100, 300, 450)
     
         self.mainLayout = QVBoxLayout()
+        self.infoLabel = QLabel("")
 
         #Create layout for Add Person GroupBox
         self.addPersonLayout = QFormLayout()
@@ -114,16 +115,20 @@ class MyWidget(QWidget):
         self.mainLayout.addWidget(self.addPersonGroupBox)
         self.mainLayout.addWidget(self.addExpenseGroupBox)
         self.mainLayout.addWidget(self.totalGroupBox)
+        self.mainLayout.addWidget(self.infoLabel)
 
         self.setLayout(self.mainLayout)
         
     # Function reimplementing Key Press, Mouse Click and Resize Events
     def person_button_click(self):
-        add_new_person.add_person(self.firtNameText.text())
-        self.nameComboBox.addItem(self.firtNameText.text())
+        infoPersonText = add_new_person.add_person(self.firtNameText.text())
+        if self.firtNameText.text() != "":
+            self.nameComboBox.addItem(self.firtNameText.text())
+        self.infoLabel.setText(infoPersonText)
 
     def expense_button_click(self):
-        add_expense.add(self.dateText.text(), self.nameComboBox.currentText(), self.amountText.text())
+        infoExpText = add_expense.add(self.dateText.text(), self.nameComboBox.currentText(), self.amountText.text())
+        self.infoLabel.setText(infoExpText)
 
     def total_button_click(self):
         totalDict = cal_sum.calSum()
