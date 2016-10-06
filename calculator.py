@@ -41,6 +41,7 @@ class MyWidget(QWidget):
         self.totalButtonBox = QHBoxLayout()
         self.totalButtonBox.setAlignment(Qt.AlignCenter)
 
+        #---------------------
         #Design Add Person box
         self.addPersonLabel = QLabel("Enter new person first name:")
 
@@ -58,7 +59,7 @@ class MyWidget(QWidget):
         self.addPersonLayout.addRow(self.addNameLayout)
         self.addPersonLayout.addRow(self.addPersonButtonBox)
 
-        
+        #---------------------
         #Design Add Expense box
         self.nameLabel = QLabel("First Name:")
         self.nameComboBox = QComboBox()
@@ -87,6 +88,7 @@ class MyWidget(QWidget):
         self.addExpenseLayout.addRow(self.amountLabel, self.amountText)
         self.addExpenseLayout.addRow(self.addExpenseButtonBox)
 
+        #---------------------
         #Design Total box
         self.showTotalButton = QPushButton("Show Expense")
         self.clearTotalButton = QPushButton("Clear Expense")
@@ -98,16 +100,19 @@ class MyWidget(QWidget):
         self.totalButtonBox.addWidget(self.clearTotalButton)
         self.totalLayout.addRow(self.totalButtonBox)
 
+        #---------------------
         #Create all group boxes
         self.addPersonGroupBox = QGroupBox("Add Person")
         self.addExpenseGroupBox = QGroupBox("Add Expense")
         self.totalGroupBox = QGroupBox("Total")
 
+        #---------------------
         #Add components to each group box
         self.addPersonGroupBox.setLayout(self.addPersonLayout)
         self.addExpenseGroupBox.setLayout(self.addExpenseLayout)
         self.totalGroupBox.setLayout(self.totalLayout)
 
+        #---------------------
         #Add group boxes to mainLayout
         self.mainLayout.addWidget(self.addPersonGroupBox)
         self.mainLayout.addWidget(self.addExpenseGroupBox)
@@ -118,6 +123,7 @@ class MyWidget(QWidget):
     # Function reimplementing Key Press, Mouse Click and Resize Events
     def person_button_click(self):
         add_new_person.add_person(self.firtNameText.text())
+        self.nameComboBox.addItem(self.firtNameText.text())
 
     def expense_button_click(self):
         add_expense.add(self.dateText.text(), self.nameComboBox.currentText(), self.amountText.text())
