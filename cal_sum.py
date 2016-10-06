@@ -1,9 +1,12 @@
 from itertools import groupby
 
-def calSum(fr):
+def calSum():
 	recordDict = {}
 	eachList = []
 	recordlist = []
+	resultDict = {}
+
+	fr = open ('records.txt', 'r')
 
 	for line in fr:
 		eachList = line.strip().split()
@@ -13,11 +16,10 @@ def calSum(fr):
 	category = lambda x: x['name']
 
 	for key, values in groupby(sorted(recordlist, key=category), category):
-		print "--------------------------"
-		print key
 		sum = 0.00
 
 		for value in values:
 			sum = sum + float(value['money'])
-		print sum
-		print "\n"
+		resultDict[key] = "{0:.2f}".format(sum)
+		print resultDict
+	return resultDict

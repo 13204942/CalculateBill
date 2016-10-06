@@ -6,6 +6,7 @@ from PySide.QtCore import *
 import add_new_person
 import get_person
 import add_expense
+import cal_sum
 
 # Our main widget class
 class MyWidget(QWidget):
@@ -37,15 +38,8 @@ class MyWidget(QWidget):
         self.totalLayout = QFormLayout()
         self.totalLayout.setHorizontalSpacing(30)
 
-        self.showTotalButtonBox = QHBoxLayout()
-        self.showTotalButtonBox.setAlignment(Qt.AlignCenter)
-        self.fangLabelBox = QHBoxLayout()
-        self.fangLabelBox.setAlignment(Qt.AlignCenter)
-        self.modanLabelBox = QHBoxLayout()
-        self.modanLabelBox.setAlignment(Qt.AlignCenter)
-        self.changLabelBox = QHBoxLayout()
-        self.changLabelBox.setAlignment(Qt.AlignCenter)
-
+        self.totalButtonBox = QHBoxLayout()
+        self.totalButtonBox.setAlignment(Qt.AlignCenter)
 
         #Design Add Person box
         self.addPersonLabel = QLabel("Enter new person first name:")
@@ -57,7 +51,7 @@ class MyWidget(QWidget):
         self.addPersonButton = QPushButton("Add")
         self.addPersonButton.setFixedWidth(100)
         #Set button clicked function
-        self.connect(self.addPersonButton, SIGNAL("clicked()"),self.person_button_click)
+        self.connect(self.addPersonButton, SIGNAL("clicked()"), self.person_button_click)
         self.addPersonButtonBox.addWidget(self.addPersonButton)
 
         self.addPersonLayout.addRow(self.addPersonLabel)
@@ -85,7 +79,7 @@ class MyWidget(QWidget):
         self.addExpenseButton = QPushButton("Add")
         self.addExpenseButton.setFixedWidth(100)
         #Set button clicked function
-        self.connect(self.addExpenseButton, SIGNAL("clicked()"),self.expense_button_click)
+        self.connect(self.addExpenseButton, SIGNAL("clicked()"), self.expense_button_click)
         self.addExpenseButtonBox.addWidget(self.addExpenseButton)
 
         self.addExpenseLayout.addRow(self.nameLabel, self.nameComboBox)
@@ -95,26 +89,14 @@ class MyWidget(QWidget):
 
         #Design Total box
         self.showTotalButton = QPushButton("Show Expense")
+        self.clearTotalButton = QPushButton("Clear Expense")
+        #Set button clicked function
+        self.connect(self.showTotalButton, SIGNAL("clicked()"), self.total_button_click)
+        self.connect(self.clearTotalButton, SIGNAL("clicked()"), self.clear_button_click)
 
-        self.fangLabel = QLabel("Fang spent")
-        self.fangAmountLabel = QLabel("4.00 Euro")
-        self.modanLabel = QLabel("Modan spent")
-        self.modanAmountLabel = QLabel("5.00 Euro")
-        self.changLabel = QLabel("Chang spent")
-        self.changAmountLabel = QLabel("4.87 Euro")
-
-        self.showTotalButtonBox.addWidget(self.showTotalButton)
-        self.fangLabelBox.addWidget(self.fangLabel)
-        self.fangLabelBox.addWidget(self.fangAmountLabel)
-        self.modanLabelBox.addWidget(self.modanLabel)
-        self.modanLabelBox.addWidget(self.modanAmountLabel)
-        self.changLabelBox.addWidget(self.changLabel)
-        self.changLabelBox.addWidget(self.changAmountLabel)
-
-        self.totalLayout.addRow(self.showTotalButtonBox)
-        self.totalLayout.addRow(self.fangLabelBox)
-        self.totalLayout.addRow(self.modanLabelBox)
-        self.totalLayout.addRow(self.changLabelBox)
+        self.totalButtonBox.addWidget(self.showTotalButton)
+        self.totalButtonBox.addWidget(self.clearTotalButton)
+        self.totalLayout.addRow(self.totalButtonBox)
 
         #Create all group boxes
         self.addPersonGroupBox = QGroupBox("Add Person")
@@ -140,16 +122,26 @@ class MyWidget(QWidget):
     def expense_button_click(self):
         add_expense.add(self.dateText.text(), self.nameComboBox.currentText(), self.amountText.text())
 
-    #def keyPressEvent(self, event):
-        #if event.key() == Qt.Key_Escape:
-            #self.close()
-                    
-    #def mouseDoubleClickEvent(self, event):
-        #self.close()
-                            
-    #def resizeEvent(self, event):
-        #self.infoLabel.setText("Window Resized to QSize(%d, %d)" % (event.size().width(), event.size().height()))
+    def total_button_click(self):
+        totalDict = cal_sum.calSum()
 
+        for key, value in totalDict.iteritems():
+            self.personMoneyLabel = QLabel(key + " spent " + value + " Euro")
+            self.personMoneyLabelBox = QHBoxLayout()
+            self.personMoneyLabelBox.setAlignment(Qt.AlignCenter)
+            self.personMoneyLabelBox.addWidget(self.personMoneyLabel)
+            self.totalLayout.setLayout(totalDict.keys().index(key)+1, QFormLayout.SpanningRole, self.personMoneyLabelBox)
+        self.showTotalButton.setDisabled(True)
+        self.clearTotalButton.setDisabled(False)
+
+    def clear_button_click(self):
+        totalDict = cal_sum.calSum()
+
+        for index in range(0, len(totalDict)):
+            myEdit = self.totalLayout.takeAt(1)
+        self.showTotalButton.setDisabled(False)
+        self.clearTotalButton.setDisabled(True)
+   
 if __name__ =='__main__':
     # Exception Handling
     try:
