@@ -91,13 +91,13 @@ class MyWidget(QWidget):
         #---------------------
         #Design Total box
         self.showTotalButton = QPushButton("Show Expense")
-        self.clearTotalButton = QPushButton("Clear Expense")
+        #self.clearTotalButton = QPushButton("Clear Expense")
         #Set button clicked function
         self.connect(self.showTotalButton, SIGNAL("clicked()"), self.total_button_click)
-        self.connect(self.clearTotalButton, SIGNAL("clicked()"), self.clear_button_click)
+        #self.connect(self.clearTotalButton, SIGNAL("clicked()"), self.clear_button_click)
 
         self.totalButtonBox.addWidget(self.showTotalButton)
-        self.totalButtonBox.addWidget(self.clearTotalButton)
+        #self.totalButtonBox.addWidget(self.clearTotalButton)
         self.totalLayout.addRow(self.totalButtonBox)
 
         #---------------------
@@ -130,6 +130,18 @@ class MyWidget(QWidget):
 
     def total_button_click(self):
         totalDict = cal_sum.calSum()
+        #child = QLayoutItem()
+
+        #if self.totalLayout.itemAt(1):
+        #    for index in range(0, len(totalDict)):
+        #        self.totalLayout.takeAt(0)
+
+        while self.totalLayout.count() > 1:
+            child = self.totalLayout.takeAt(1).widget()
+            if child:
+                child.deleteLater()
+
+        self.totalLayout.update()
 
         for key, value in totalDict.iteritems():
             self.personMoneyLabel = QLabel(key + " spent " + value + " Euro")
@@ -137,16 +149,16 @@ class MyWidget(QWidget):
             self.personMoneyLabelBox.setAlignment(Qt.AlignCenter)
             self.personMoneyLabelBox.addWidget(self.personMoneyLabel)
             self.totalLayout.setLayout(totalDict.keys().index(key)+1, QFormLayout.SpanningRole, self.personMoneyLabelBox)
-        self.showTotalButton.setDisabled(True)
-        self.clearTotalButton.setDisabled(False)
+        #self.showTotalButton.setDisabled(True)
+        #self.clearTotalButton.setDisabled(False)
 
-    def clear_button_click(self):
-        totalDict = cal_sum.calSum()
+    #def clear_button_click(self):
+        #totalDict = cal_sum.calSum()
 
-        for index in range(0, len(totalDict)):
-            myEdit = self.totalLayout.takeAt(1)
-        self.showTotalButton.setDisabled(False)
-        self.clearTotalButton.setDisabled(True)
+        #for index in range(0, len(totalDict)):
+        #    myEdit = self.totalLayout.takeAt(1)
+        #self.showTotalButton.setDisabled(False)
+        #self.clearTotalButton.setDisabled(True)
    
 if __name__ =='__main__':
     # Exception Handling
