@@ -8,10 +8,16 @@ http://doc.qt.io/qt-5/qtwidgets-layouts-basiclayouts-example.html
 http://zetcode.com/gui/pysidetutorial/layoutmanagement/
 
 ## Design UI
-![Alt text](/python_app.JPG?raw=true "UI")
+![Alt text](/img/python_app.JPG?raw=true "UI")
 
 ## App Demo
-![Alt text](/App_Demo.png?raw=true "UI")
+![Alt text](/img/App_Demo.png?raw=true "UI")
+
+## Run app on Mac
+Go to /app folder and run this command in the shell:
+```bash
+python calculator.py
+```
 
 ## Install Qt
 Go to the official website to install Qt on Windows/Mac/Linux following the instructions
