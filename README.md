@@ -1,4 +1,4 @@
-# CalculateBill
+# Bills Calculator
 This python app is used to calculate bill when people share their bill together.
 e.g. like electric bill, broadband bill or watrer bill
 
@@ -22,15 +22,15 @@ Go to the official website to install Qt on Windows/Mac/Linux following the inst
 ### Windows
 Installation of PySide on Windows is easy with the help of installer. Follow these steps for setting up PySide on Windows:
 
-*Get the latest stable package compatible to your operating system architecture and the Python version installed from the releases page:
+* Get the latest stable package compatible to your operating system architecture and the Python version installed from the releases page:
 
 [http://qt-project.org/wiki/PySide_Binaries_Windows](http://qt-project.org/wiki/PySide_Binaries_Windows)
 
-*Run the downloaded installer executable which will automatically detect the Python installation from your system.
+* Run the downloaded installer executable which will automatically detect the Python installation from your system.
 
-*You are given an option to install PySide on the default path or at the path of your choice.
+* You are given an option to install PySide on the default path or at the path of your choice.
 
-*Click on Next in the subsequent windows, and finally on Finish, PySide is installed successfully on your system.
+* Click on Next in the subsequent windows, and finally on Finish, PySide is installed successfully on your system.
 
 ### Mac OS X
 The binaries for MAC OS X installers of PySide are available at:
@@ -75,25 +75,24 @@ Before starting to build PySide on Windows, ensure that the following prerequisi
 Make sure that Git and CMake executable is set in your system PATH. Now, follow these steps to start building PySide:
 
  * Git clone the PySide repository from Github:
-
+```bash
 c:/> git clone https://github.com/PySide/pyside-setup.git pyside-setup
-
+```
 * Change your working directory to "pyside-setup":
-
+```bash
 c:/> cd pyside-setup
-
+```
 * Build the installer:
-
+```bash
 c:\> c:\Python27\python.exe setup.py bdist_wininst --msvc-version=9.0 --make=c:\Qt\4.8.4\bin\qmake.exe --openssl=c:\OpenSSL32bit\bin
-
+```
 * Upon successful installation, the binaries can be found in the sub-folder "dist":
-
+```bash
 c:\pyside-setup\dist
-
+```
 * On completion of these steps, the PySide should have been successfully built on your system.
 
 ### Linux
-Linux
 
 To build PySide on Linux, the following prerequisites must be available. Check if you have them already or download them using the following links.
 
